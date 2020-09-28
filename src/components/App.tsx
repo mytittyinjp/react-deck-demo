@@ -36,7 +36,12 @@ function App() {
       [168, 0, 0],
     ]);
 
+  const initialHoverState = {
+    object: { properties: { year: [] } },
+  };
+
   const [year, setYear] = useState(2015);
+  const [hoverInfo, setHoverInfo] = useState(initialHoverState);
 
   useEffect(() => {
     let populationMap = new Map();
@@ -67,6 +72,7 @@ function App() {
     },
     getLineColor: [255, 255, 255],
     pickable: true,
+    onHover: (info) => setHoverInfo(info),
   });
 
   const onChangeYearHanlder = (name, value) => {
@@ -82,6 +88,11 @@ function App() {
         pickingRadius={5}
         initialViewState={INITIAL_VIEW_STATE}
         controller={true}
+        getTooltip={() =>
+          hoverInfo.object && {
+            text: `人口：${hoverInfo.object.properties.year[year]}人`,
+          }
+        }
       >
         <StaticMap
           reuseMaps
