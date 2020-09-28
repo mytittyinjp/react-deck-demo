@@ -9,3 +9,6 @@ export const INITIAL_VIEW_STATE = {
   longitude: INITIAL_LONGITUDE,
   zoom: 10,
 };
+
+export const MIN_YEAR = 2015;
+export const MAX_YEAR = 2040;
